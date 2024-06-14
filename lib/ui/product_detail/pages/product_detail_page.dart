@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key});
@@ -97,7 +98,9 @@ class ProductDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.email),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push('/contact-form');
+                  },
                   label: const Text('Contactar vendedor'),
                 ),
               ),
