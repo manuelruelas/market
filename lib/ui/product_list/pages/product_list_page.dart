@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market/ui/product_list/widgets/product_list_item.dart';
 
 class ProductListPage extends StatelessWidget {
@@ -59,7 +60,11 @@ class ProductListPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return const ProductListItem();
+                return ProductListItem(
+                  onTap: () {
+                    context.go('/product/1');
+                  },
+                );
               },
               childCount: 10,
             ),

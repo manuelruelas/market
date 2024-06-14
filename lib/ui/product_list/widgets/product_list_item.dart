@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ProductListItem extends StatelessWidget {
-  const ProductListItem({super.key});
+  const ProductListItem({super.key, this.onTap});
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: const Image(
         height: 70,
         width: 70,
