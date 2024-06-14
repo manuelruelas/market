@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "679144292426",
+    "project_id": "rualdev-market",
+    "storage_bucket": "rualdev-market.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679144292426:android:aef5d6417a1b2cf21626b3",
+        "android_client_info": {
+          "package_name": "com.rualdev.market"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_DTiQsQlJuMynMv5tmo6gG4y4nPd8Qvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
