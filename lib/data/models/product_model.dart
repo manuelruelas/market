@@ -26,7 +26,9 @@ class ProductModel {
         price: json["price"].toDouble(),
         category: json["category"],
         rating: json["rating"],
-        imageUrls: List<String>.from(json["images"].map((x) => x)),
+        imageUrls: json["images"] != null
+            ? List<String>.from(json["images"].map((x) => x))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,6 +47,6 @@ class ProductModel {
         price: price,
         category: category,
         rating: rating,
-        imageUrls: imageUrls,
+        imageUrls: imageUrls ?? [],
       );
 }

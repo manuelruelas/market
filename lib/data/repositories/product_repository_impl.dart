@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:market/core/errors/failures.dart';
 import 'package:market/data/data_sources/remote/products_service.dart';
@@ -15,7 +17,19 @@ class ProductsRepositoryImpl implements ProductsRepository {
       final products = await productDataSource.getProducts();
       return Right(products.map((e) => e.toEntity()).toList());
     } catch (e) {
+      log(e.toString());
       return Left(ServerFailure("Fallo al obtener los productos"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Product>> getProductById(String id) async {
+    try {
+      final product = await productDataSource.getProductById(id);
+      return Right(product.toEntity());
+    } catch (e) {
+      log(e.toString());
+      return Left(ServerFailure("Fallo al obtener el producto"));
     }
   }
 }

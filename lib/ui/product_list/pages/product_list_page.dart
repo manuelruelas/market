@@ -110,6 +110,11 @@ class _ProductListPageState extends State<ProductListPage> {
                 ),
               ),
             ),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 50,
+            ),
+          )
         ],
       ),
     );

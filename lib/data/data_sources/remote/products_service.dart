@@ -11,4 +11,9 @@ class ProductsService {
     final products = response.data as List;
     return products.map((product) => ProductModel.fromJson(product)).toList();
   }
+
+  Future<ProductModel> getProductById(String id) async {
+    final response = await client.get('/products/$id');
+    return ProductModel.fromJson(response.data);
+  }
 }
