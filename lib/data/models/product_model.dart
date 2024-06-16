@@ -1,3 +1,5 @@
+import 'package:market/domain/entities/product.dart';
+
 class ProductModel {
   String id;
   String name;
@@ -32,4 +34,12 @@ class ProductModel {
         "category": category,
         "rating": rating,
       };
+  Product toEntity() => Product(
+        id: id,
+        name: name,
+        description: description,
+        price: price,
+        category: category,
+        rating: rating,
+      );
 }

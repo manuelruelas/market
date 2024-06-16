@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:market/domain/entities/product.dart';
 
 class ProductListItem extends StatelessWidget {
-  const ProductListItem({super.key, this.onTap});
-
+  const ProductListItem({super.key, this.onTap, required this.product});
+  final Product product;
   final VoidCallback? onTap;
 
   @override
@@ -10,8 +11,9 @@ class ProductListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
@@ -25,15 +27,38 @@ class ProductListItem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(product.name),
+                  Text('\$${product.price.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    product.description ?? 'Sin descripción',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.grey,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Row(
               children: [
-                const Text('Product Name'),
-                Text('\$50,000.00',
-                    style: Theme.of(context).textTheme.titleMedium),
-                const Text('Product Description'),
+                const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                  size: 16,
+                ),
+                Text(
+                  product.rating.toString(),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.grey,
+                      ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
