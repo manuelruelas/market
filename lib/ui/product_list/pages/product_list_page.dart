@@ -48,12 +48,6 @@ class ProductListPage extends StatelessWidget {
                   },
                   child: const Text('Button 3'),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Implement filter logic for button 4
-                  },
-                  child: const Text('Button 4'),
-                ),
               ],
             ),
           ),
@@ -62,7 +56,7 @@ class ProductListPage extends StatelessWidget {
               (context, index) {
                 return ProductListItem(
                   onTap: () {
-                    context.go('/product/1');
+                    context.push('/product/1');
                   },
                 );
               },
