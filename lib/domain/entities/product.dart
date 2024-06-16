@@ -5,6 +5,7 @@ class Product {
   double price;
   String category;
   int rating;
+  List<String>? imageUrls;
 
   Product({
     required this.id,
@@ -13,5 +14,6 @@ class Product {
     required this.price,
     required this.category,
     required this.rating,
+    this.imageUrls = const [],
   });
 }

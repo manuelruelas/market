@@ -13,12 +13,17 @@ class ProductListCubit extends Cubit<ProductListState> {
   final GetProductsUsecase getProductsUsecase;
 
   void getProducts() async {
+    if (state.status == ProductListStatus.loading) return;
     emit(state.copyWith(status: ProductListStatus.loading));
     final products = await getProductsUsecase(NoParams());
     products.fold(
       (failure) => emit(state.copyWith(status: ProductListStatus.error)),
-      (products) => emit(
-          state.copyWith(products: products, status: ProductListStatus.loaded)),
+      (fetchedProducts) {
+        final List<Product> products = [...state.products, ...fetchedProducts];
+
+        emit(state.copyWith(
+            products: products, status: ProductListStatus.loaded));
+      },
     );
   }
 }

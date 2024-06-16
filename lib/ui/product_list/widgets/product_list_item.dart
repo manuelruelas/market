@@ -17,12 +17,12 @@ class ProductListItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: const Image(
-                height: 100,
-                width: 100,
+              child: Image(
+                height: 70,
+                width: 70,
                 fit: BoxFit.cover,
                 image: AssetImage(
-                  'assets/images/carro-en-venta.jpeg',
+                  'assets/images/${product.category}.png',
                 ),
               ),
             ),
