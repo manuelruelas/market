@@ -15,13 +15,16 @@ class ProductListPage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             floating: true,
-            flexibleSpace: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search...',
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
               ),
             ),
@@ -51,17 +54,17 @@ class ProductListPage extends StatelessWidget {
               ],
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return ProductListItem(
-                  onTap: () {
-                    context.push('/product/1');
-                  },
-                );
-              },
-              childCount: 10,
+          SliverList.separated(
+            separatorBuilder: (context, index) => Divider(
+              color: Colors.grey.shade300,
             ),
+            itemBuilder: (context, index) {
+              return ProductListItem(
+                onTap: () {
+                  context.push('/product/1');
+                },
+              );
+            },
           ),
         ],
       ),
