@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactFormPage extends StatelessWidget {
   const ContactFormPage({super.key});
@@ -47,22 +48,32 @@ class ContactFormPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey.shade300,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Telefono",
-                              style: Theme.of(context).textTheme.titleMedium),
-                          const Text("+52 6681172112")
-                        ],
+                InkWell(
+                  onTap: () {
+                    launchUrl(
+                      Uri(
+                        scheme: "tel",
+                        path: "+526681172112",
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey.shade300,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Telefono",
+                                style: Theme.of(context).textTheme.titleMedium),
+                            const Text("+52 6681172112")
+                          ],
+                        ),
                       ),
                     ),
                   ),
