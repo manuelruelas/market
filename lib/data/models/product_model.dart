@@ -8,6 +8,8 @@ class ProductModel {
   String category;
   int rating;
   List<String>? imageUrls;
+  double lat;
+  double long;
 
   ProductModel({
     required this.id,
@@ -17,6 +19,8 @@ class ProductModel {
     required this.category,
     required this.rating,
     this.imageUrls,
+    required this.lat,
+    required this.long,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -29,6 +33,8 @@ class ProductModel {
         imageUrls: json["images"] != null
             ? List<String>.from(json["images"].map((x) => x))
             : [],
+        lat: json["lat"],
+        long: json["long"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,5 +54,7 @@ class ProductModel {
         category: category,
         rating: rating,
         imageUrls: imageUrls ?? [],
+        lat: lat,
+        long: long,
       );
 }

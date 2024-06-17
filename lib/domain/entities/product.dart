@@ -6,6 +6,8 @@ class Product {
   String category;
   int rating;
   List<String>? imageUrls;
+  double lat;
+  double long;
 
   Product({
     required this.id,
@@ -15,5 +17,7 @@ class Product {
     required this.category,
     required this.rating,
     this.imageUrls = const [],
+    required this.lat,
+    required this.long,
   });
 }

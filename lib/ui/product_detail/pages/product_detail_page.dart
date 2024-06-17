@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market/ui/product_detail/cubit/product_detail_cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key});
@@ -107,7 +108,12 @@ class ProductDetailPage extends StatelessWidget {
                           ),
                         ),
                         OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            launchUrl(
+                              Uri.parse(
+                                  'https://www.google.com/maps/search/?api=1&query=${state.product?.lat},${state.product?.long}'),
+                            );
+                          },
                           label: const Text("Mapa"),
                           icon: const Icon(
                             Icons.map,
