@@ -35,88 +35,93 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Articulos en venta'),
-      ),
-      body: BlocBuilder<ProductListCubit, ProductListState>(
-        builder: (context, state) {
-          return CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              SliverAppBar(
-                floating: true,
-                flexibleSpace: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search...',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+      backgroundColor: Colors.grey[200],
+      body: SafeArea(
+        top: false,
+        child: BlocBuilder<ProductListCubit, ProductListState>(
+          builder: (context, state) {
+            return CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                const SliverAppBar(
+                  floating: true,
+                  title: Text('Ultimos productos'),
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        icon: const Icon(Icons.search),
+                        hintText: 'Buscar...',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // TODO: Implement filter logic for button 1
-                      },
-                      child: const Text('Button 1'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // TODO: Implement filter logic for button 2
-                      },
-                      child: const Text('Button 2'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // TODO: Implement filter logic for button 3
-                      },
-                      child: const Text('Button 3'),
-                    ),
-                  ],
-                ),
-              ),
-              SliverList.separated(
-                itemCount: state.products.length,
-                separatorBuilder: (context, index) => Divider(
-                  color: Colors.grey.shade300,
-                ),
-                itemBuilder: (context, index) {
-                  if (index == state.products.length) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Center(
-                        child: CircularProgressIndicator(),
+                SliverToBoxAdapter(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: Implement filter logic for button 1
+                        },
+                        child: const Text('Button 1'),
                       ),
-                    );
-                  }
-                  return ProductListItem(
-                    product: state.products[index],
-                    onTap: () {
-                      context.push('/product/1');
-                    },
-                  );
-                },
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: state.status == ProductListStatus.loading
-                      ? const Center(child: CircularProgressIndicator())
-                      : const SizedBox(),
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: Implement filter logic for button 2
+                        },
+                        child: const Text('Button 2'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: Implement filter logic for button 3
+                        },
+                        child: const Text('Button 3'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+                SliverList.separated(
+                  itemCount: state.products.length,
+                  separatorBuilder: (context, index) => const SizedBox(),
+                  itemBuilder: (context, index) {
+                    if (index == state.products.length) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    return ProductListItem(
+                      product: state.products[index],
+                      onTap: () {
+                        context.push('/product/1');
+                      },
+                    );
+                  },
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: state.status == ProductListStatus.loading
+                        ? const Center(child: CircularProgressIndicator())
+                        : const SizedBox(),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
