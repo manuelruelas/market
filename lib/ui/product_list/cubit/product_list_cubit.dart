@@ -22,8 +22,30 @@ class ProductListCubit extends Cubit<ProductListState> {
         final List<Product> products = [...state.products, ...fetchedProducts];
 
         emit(state.copyWith(
-            products: products, status: ProductListStatus.loaded));
+          products: products,
+          originalProducts: products,
+          status: ProductListStatus.loaded,
+        ));
       },
     );
+  }
+
+  void search(String query) {
+    if (query.isEmpty) {
+      emit(state.copyWith(
+          infiniteScroll: true, products: state.originalProducts));
+      return;
+    }
+    emit(state.copyWith(infiniteScroll: false));
+    final List<Product> products = state.originalProducts
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    emit(state.copyWith(products: products));
+  }
+
+  void resetSearch() {
+    emit(
+        state.copyWith(infiniteScroll: true, products: state.originalProducts));
   }
 }

@@ -53,6 +53,8 @@ class _ProductListPageState extends State<ProductListPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      onChanged: (value) =>
+                          context.read<ProductListCubit>().search(value),
                       decoration: InputDecoration(
                         icon: const Icon(Icons.search),
                         hintText: 'Buscar...',
@@ -90,6 +92,29 @@ class _ProductListPageState extends State<ProductListPage> {
                     ],
                   ),
                 ),
+                if (state.products.isEmpty)
+                  SliverFillRemaining(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              'assets/images/caja-vacia.png',
+                              width: 150,
+                            ),
+                            const SizedBox(height: 16.0),
+                            const Text(
+                              'No se encontraron productos',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 SliverList.separated(
                   itemCount: state.products.length,
                   separatorBuilder: (context, index) => const SizedBox(),
