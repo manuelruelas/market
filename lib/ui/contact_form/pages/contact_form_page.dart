@@ -20,6 +20,7 @@ class ContactFormPage extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Mensaje enviado"),
+              backgroundColor: Colors.green,
             ),
           );
           context.go('/product-list');

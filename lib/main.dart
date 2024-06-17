@@ -50,7 +50,7 @@ class MainApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.black,
         progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Colors.white,
+          color: Colors.grey,
         ),
       ),
       routerConfig: routerConfig,
