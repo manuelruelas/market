@@ -36,60 +36,68 @@ class _ProductListPageState extends State<ProductListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product List'),
+        title: const Text('Articulos en venta'),
       ),
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            flexibleSpace: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+      body: BlocBuilder<ProductListCubit, ProductListState>(
+        builder: (context, state) {
+          return CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverAppBar(
+                floating: true,
+                flexibleSpace: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search...',
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          // SliverToBoxAdapter(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: [
-          //       ElevatedButton(
-          //         onPressed: () {
-          //           // TODO: Implement filter logic for button 1
-          //         },
-          //         child: const Text('Button 1'),
-          //       ),
-          //       ElevatedButton(
-          //         onPressed: () {
-          //           // TODO: Implement filter logic for button 2
-          //         },
-          //         child: const Text('Button 2'),
-          //       ),
-          //       ElevatedButton(
-          //         onPressed: () {
-          //           // TODO: Implement filter logic for button 3
-          //         },
-          //         child: const Text('Button 3'),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          BlocBuilder<ProductListCubit, ProductListState>(
-            builder: (context, state) {
-              return SliverList.separated(
+              SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // TODO: Implement filter logic for button 1
+                      },
+                      child: const Text('Button 1'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // TODO: Implement filter logic for button 2
+                      },
+                      child: const Text('Button 2'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // TODO: Implement filter logic for button 3
+                      },
+                      child: const Text('Button 3'),
+                    ),
+                  ],
+                ),
+              ),
+              SliverList.separated(
                 itemCount: state.products.length,
                 separatorBuilder: (context, index) => Divider(
                   color: Colors.grey.shade300,
                 ),
                 itemBuilder: (context, index) {
+                  if (index == state.products.length) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
                   return ProductListItem(
                     product: state.products[index],
                     onTap: () {
@@ -97,26 +105,25 @@ class _ProductListPageState extends State<ProductListPage> {
                     },
                   );
                 },
-              );
-            },
-          ),
-          if (context.read<ProductListCubit>().state.status ==
-              ProductListStatus.loading)
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Center(
-                  child: CircularProgressIndicator(),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: state.status == ProductListStatus.loading
+                      ? const Center(child: CircularProgressIndicator())
+                      : const SizedBox(),
                 ),
               ),
-            ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 50,
-            ),
-          )
-        ],
+            ],
+          );
+        },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
