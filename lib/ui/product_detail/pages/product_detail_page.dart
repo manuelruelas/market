@@ -26,7 +26,7 @@ class ProductDetailPage extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(

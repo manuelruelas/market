@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:market/firebase_options.dart';
 import 'package:market/router.dart';
@@ -37,6 +38,21 @@ class MainApp extends StatelessWidget {
       print('Token de registro FCM: $token');
     });
     return MaterialApp.router(
+      theme: Theme.of(context).copyWith(
+        colorScheme: const ColorScheme.light(
+          primary: Colors.black,
+          secondary: Colors.red,
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        scaffoldBackgroundColor: Colors.black,
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Colors.white,
+        ),
+      ),
       routerConfig: routerConfig,
     );
   }

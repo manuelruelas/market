@@ -11,7 +11,10 @@ class ContactFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text("Contacto"),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -22,7 +25,7 @@ class ContactFormPage extends StatelessWidget {
                 const SizedBox(
                   width: double.infinity,
                   child: CircleAvatar(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.grey,
                     radius: 50,
                     child: Icon(
                       Icons.person,
@@ -97,7 +100,7 @@ class ContactFormPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -113,9 +116,9 @@ class ContactFormPage extends StatelessWidget {
                                           .nameChanged(value);
                                     },
                                     decoration: const InputDecoration(
-                                      labelText: "Nombre",
-                                      border: OutlineInputBorder(),
-                                    ),
+                                        labelText: "Nombre",
+                                        border: OutlineInputBorder(),
+                                        icon: Icon(Icons.person)),
                                   );
                                 },
                               ),
@@ -133,6 +136,7 @@ class ContactFormPage extends StatelessWidget {
                                     decoration: const InputDecoration(
                                       labelText: "Correo contacto",
                                       border: OutlineInputBorder(),
+                                      icon: Icon(Icons.mail),
                                     ),
                                   );
                                 },
@@ -166,7 +170,7 @@ class ContactFormPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ElevatedButton.icon(
+                            FilledButton.icon(
                               icon: const Icon(Icons.send),
                               onPressed: () {
                                 context.read<ContactFormCubit>().submit();
