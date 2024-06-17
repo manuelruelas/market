@@ -11,7 +11,7 @@ class ContactForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<ContactFormCubit>(),
-      child: const ContactFormPage(),
+      child: ContactFormPage(),
     );
   }
 }

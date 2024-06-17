@@ -24,13 +24,14 @@ class ContactFormCubit extends Cubit<ContactFormState> {
   }
 
   void submit() {
+    emit(state.copyWith(status: ContactFormStatus.sending));
     final message = ContactMessage(
       name: state.name,
       email: state.email,
       message: state.message,
       from: state.email,
     );
-    // Send the message
+
     sendEmailUsecase(SendEmailParams(message: message)).then((result) {
       result.fold(
         (failure) => emit(state.copyWith(status: ContactFormStatus.error)),

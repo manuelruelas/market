@@ -36,4 +36,4 @@ class ContactFormState extends Equatable {
   }
 }
 
-enum ContactFormStatus { initial, loading, success, error }
+enum ContactFormStatus { initial, loading, success, error, sending }
