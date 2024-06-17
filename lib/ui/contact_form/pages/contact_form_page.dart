@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market/ui/contact_form/contact_form.dart';
+import 'package:market/ui/contact_form/cubit/contact_form_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactFormPage extends StatelessWidget {
@@ -101,31 +104,58 @@ class ContactFormPage extends StatelessWidget {
                         Form(
                           child: Column(
                             children: [
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: "Nombre",
-                                  border: OutlineInputBorder(),
-                                ),
+                              BlocBuilder<ContactFormCubit, ContactFormState>(
+                                builder: (context, state) {
+                                  return TextFormField(
+                                    onChanged: (value) {
+                                      context
+                                          .read<ContactFormCubit>()
+                                          .nameChanged(value);
+                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: "Nombre",
+                                      border: OutlineInputBorder(),
+                                    ),
+                                  );
+                                },
                               ),
                               const SizedBox(
                                 height: 16,
                               ),
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: "Correo contacto",
-                                  border: OutlineInputBorder(),
-                                ),
+                              BlocBuilder<ContactFormCubit, ContactFormState>(
+                                builder: (context, state) {
+                                  return TextFormField(
+                                    onChanged: (value) {
+                                      context
+                                          .read<ContactFormCubit>()
+                                          .emailChanged(value);
+                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: "Correo contacto",
+                                      border: OutlineInputBorder(),
+                                    ),
+                                  );
+                                },
                               ),
                               const SizedBox(
                                 height: 16,
                               ),
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: "Asunto",
-                                  border: OutlineInputBorder(),
-                                ),
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 5,
+                              BlocBuilder<ContactFormCubit, ContactFormState>(
+                                builder: (context, state) {
+                                  return TextFormField(
+                                    onChanged: (value) {
+                                      context
+                                          .read<ContactFormCubit>()
+                                          .messageChanged(value);
+                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: "Asunto",
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 5,
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -138,7 +168,9 @@ class ContactFormPage extends StatelessWidget {
                           children: [
                             ElevatedButton.icon(
                               icon: const Icon(Icons.send),
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<ContactFormCubit>().submit();
+                              },
                               label: const Text("Enviar"),
                             ),
                           ],

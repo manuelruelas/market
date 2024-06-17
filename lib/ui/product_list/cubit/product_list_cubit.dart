@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market/core/usecases/no_params.dart';
-import 'package:market/domain/domain/get_products_usecase.dart';
+import 'package:market/domain/usecases/get_products_usecase.dart';
 import 'package:market/domain/entities/product.dart';
 
 part 'product_list_state.dart';

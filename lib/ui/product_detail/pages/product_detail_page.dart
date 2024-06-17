@@ -52,7 +52,7 @@ class ProductDetailPage extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 24,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -78,12 +78,11 @@ class ProductDetailPage extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodyMedium);
                         },
                       ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      const Text("10 reviews", style: TextStyle(fontSize: 12)),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 8,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
